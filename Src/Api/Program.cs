@@ -1,3 +1,4 @@
+using Api.Middlewares;
 using Infrastructure;
 using Microsoft.AspNetCore.HttpLogging;
 using Serilog;
@@ -36,6 +37,7 @@ builder.Host.UseSerilog((context, provider, config) =>
 // logger.Information("logging works");
 var app = builder.Build();
 
+app.UseMiddleware<ExceptionsMiddleWare>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
