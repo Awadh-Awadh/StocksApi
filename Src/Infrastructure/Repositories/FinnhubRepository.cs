@@ -4,12 +4,12 @@ namespace Infrastructure.Repositories;
 
 public class FinnhubRepository : IFinnhubRepository
 {
-    public Task<Dictionary<string, object>?> GetCompanyProfile(string stockSymbol)
+    public Task<IDictionary<string, object>?> GetCompanyProfile(string stockSymbol)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Dictionary<string, object>?> GetStockPriceQuote(string stockSymbol)
+    public Task<IDictionary<string, object>?> GetStockPriceQuote(string stockSymbol)
     {
         throw new NotImplementedException();
     }
@@ -19,7 +19,7 @@ public class FinnhubRepository : IFinnhubRepository
         throw new NotImplementedException();
     }
 
-    public Task<Dictionary<string, object>?> SearchStocks(string stockSymbolToSearch)
+    public Task<IDictionary<string, object>?> SearchStocks(string stockSymbolToSearch)
     {
         throw new NotImplementedException();
     }
