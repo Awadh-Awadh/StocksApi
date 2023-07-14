@@ -1,4 +1,5 @@
 using System.Net;
+using Application.Exceptions;
 using Application.Models;
 using Azure.Core;
 
@@ -36,7 +37,8 @@ public class ExceptionsMiddleWare
         // TO:Do log messages based on the type of exception thrown
         var message = ex switch
         {
-            ArgumentException => "Arguments should not be null"
+            ArgumentException => "Arguments should not be null",
+            FinhubException => "An Error occured while fetching data"
         };
         await context.Response.WriteAsync(new ErrorDetails()
         {
