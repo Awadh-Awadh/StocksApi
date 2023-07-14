@@ -1,4 +1,5 @@
 using Api.Middlewares;
+using Application.Models.Configuration;
 using Infrastructure;
 using Microsoft.AspNetCore.HttpLogging;
 using Serilog;
@@ -15,6 +16,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpLogging(options =>
 {
     options.LoggingFields = HttpLoggingFields.All;
+});
+builder.Services.Configure<FinHubApi>(configuration.GetSection("FinHubApi"));
+builder.Services.AddHttpClient("finhubApiClient", c =>
+{
+    var baseUrl = configuration.GetSection("FinHubApi").GetValue<string>("BaseUrl");
+    c.BaseAddress = new Uri(baseUrl!);
 });
 builder.Services.AddInfrastructureServices(configuration);
 
