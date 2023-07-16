@@ -2,7 +2,7 @@ using Domain.Interfaces;
 
 namespace Application.Services.FinnhubServices;
 
-public class FinnhubCompanyProfile:IFinnhubCompanyProfile
+public class FinnhubCompanyProfile : IFinnhubCompanyProfile
 {
     public Task<Dictionary<string, object>?> GetCompanyProfile(string stockSymbol)
     {

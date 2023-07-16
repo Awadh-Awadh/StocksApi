@@ -15,8 +15,6 @@ public class GetAllStocksController : ControllerBase
     [HttpGet(Name = "GetStocks")]
     public IActionResult GetAllStocks()
     {
-       
-        
         return Ok();
     }
 

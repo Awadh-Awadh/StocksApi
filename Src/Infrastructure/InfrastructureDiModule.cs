@@ -1,4 +1,5 @@
 using Domain.Interfaces;
+using Domain.Interfaces.RepositoryContracts;
 using Infrastructure.Persistence;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;

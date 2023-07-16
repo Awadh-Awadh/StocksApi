@@ -1,27 +1,51 @@
 using Domain.Entities;
 using Domain.Interfaces;
+using Domain.Interfaces.RepositoryContracts;
+using Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
 public class StocksRepository : IStocksRepository
 {
-    public Task<BuyOrder> CreateBuyOrder(BuyOrder buyOrder)
+    private readonly StockMarketDbContext _db;
+
+    public StocksRepository(StockMarketDbContext db)
     {
-        throw new NotImplementedException();
+        _db = db;
     }
 
-    public Task<SellOrder> CreateSellOrder(SellOrder sellOrder)
+    public async Task<BuyOrder> CreateBuyOrder(BuyOrder buyOrder)
     {
-        throw new NotImplementedException();
+        await _db.AddAsync(buyOrder);
+        await _db.SaveChangesAsync();
+
+        return buyOrder;
     }
 
-    public Task<List<BuyOrder>> GetBuyOrders()
+    public async Task<SellOrder> CreateSellOrder(SellOrder sellOrder)
     {
-        throw new NotImplementedException();
+        await _db.AddAsync(sellOrder);
+        await _db.SaveChangesAsync();
+
+        return sellOrder;
     }
 
-    public Task<List<SellOrder>> GetSellOrders()
+    public async Task<List<BuyOrder>> GetBuyOrders()
     {
-        throw new NotImplementedException();
+        List<BuyOrder> buyOrders = await _db.BuyOrders
+            .OrderByDescending(temp => temp.DateAndTimeOfOrder)
+            .ToListAsync();
+
+        return buyOrders;
+    }
+
+    public async Task<List<SellOrder>> GetSellOrders()
+    {
+        List<SellOrder> sellOrders = await _db.SellOrders
+            .OrderByDescending(temp => temp.DateAndTimeOfOffer)
+            .ToListAsync();
+
+        return sellOrders;
     }
 }
