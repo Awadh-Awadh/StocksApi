@@ -18,7 +18,7 @@ public static class InfrastructureDiModule
 
         services.AddDbContext<StockMarketDbContext>(options =>
         {
-            options.UseSqlServer(config.GetConnectionString("Default"));
+            options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
         });
         return services;
     }
