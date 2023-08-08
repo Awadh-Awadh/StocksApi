@@ -5,7 +5,7 @@ namespace Infrastructure.Persistence;
 
 public class StockMarketDbContext : DbContext
 {
-    public StockMarketDbContext(DbContextOptions options) :base(options)
+    public StockMarketDbContext(DbContextOptions<StockMarketDbContext> options) :base(options)
     {
         
     }

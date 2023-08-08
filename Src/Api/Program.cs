@@ -1,4 +1,5 @@
 using Api.Middlewares;
+using Application;
 using Application.Models.Configuration;
 using Infrastructure;
 using Microsoft.AspNetCore.HttpLogging;
@@ -8,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -24,6 +25,7 @@ builder.Services.AddHttpClient("finhubApiClient", c =>
     c.BaseAddress = new Uri(baseUrl!);
 });
 builder.Services.AddInfrastructureServices(configuration);
+builder.Services.AddApplicationServices(configuration);
 
 // configure serilog
 builder.Host.UseSerilog((context, provider, config) =>
