@@ -1,17 +1,27 @@
 using Domain.Entities;
+using Domain.Interfaces.RepositoryContracts;
 using Domain.Interfaces.ServiceContracts.StocksService;
 
 namespace Application.Services.StocksServices;
 
 public class BuyOrderService : IBuyOrderService
 {
-    public Task<BuyOrder> CreateBuyOrder(BuyOrder buyOrder)
+    private readonly IStocksRepository _repository;
+
+    public BuyOrderService(IStocksRepository repository)
     {
-        throw new NotImplementedException();
+        _repository = repository;
     }
 
-    public Task<List<BuyOrder>> GetBuyOrders()
+    public async Task<BuyOrder> CreateBuyOrder(BuyOrder buyOrder)
     {
-        throw new NotImplementedException();
+       return await _repository.CreateBuyOrder(buyOrder);
+    }
+
+    public async Task<List<BuyOrder>> GetBuyOrders()
+    {
+        var orders = await _repository.GetBuyOrders();
+
+        return orders;
     }
 }

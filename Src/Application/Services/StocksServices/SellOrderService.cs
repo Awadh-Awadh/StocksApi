@@ -1,17 +1,29 @@
 using Domain.Entities;
+using Domain.Interfaces.RepositoryContracts;
 using Domain.Interfaces.ServiceContracts.StocksService;
 
 namespace Application.Services.StocksServices;
 
-public class StockService : ISellOrderService
+public class SellOrderService : ISellOrderService
 {
-    public Task<SellOrder> CreateSellOrder(SellOrder sellOrder)
+    private readonly IStocksRepository _repository;
+
+    public SellOrderService(IStocksRepository repository)
     {
-        throw new NotImplementedException();
+        _repository = repository;
     }
 
-    public Task<List<SellOrder>> GetSellOrders()
+    public async Task<SellOrder> CreateSellOrder(SellOrder sellOrder)
     {
-        throw new NotImplementedException();
+        var saleOrder = await _repository.CreateSellOrder(sellOrder);
+
+        return saleOrder;
+    }
+
+    public async Task<List<SellOrder>> GetSellOrders()
+    {
+        var orders = await _repository.GetSellOrders();
+
+        return orders;
     }
 }

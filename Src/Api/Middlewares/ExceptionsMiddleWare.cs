@@ -38,7 +38,8 @@ public class ExceptionsMiddleWare
         var message = ex switch
         {
             ArgumentException => "Arguments should not be null",
-            FinhubException => "An Error occured while fetching data"
+            FinhubException => "An Error occured while fetching data",
+            _ => "Internal Server Error"
         };
         await context.Response.WriteAsync(new ErrorDetails()
         {
