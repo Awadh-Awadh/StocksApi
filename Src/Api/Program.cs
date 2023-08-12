@@ -19,6 +19,7 @@ builder.Services.AddHttpLogging(options =>
     options.LoggingFields = HttpLoggingFields.All;
 });
 builder.Services.Configure<FinHubApi>(configuration.GetSection("FinHubApi"));
+builder.Services.Configure<TradingOptions>(configuration.GetSection("TradingOptions"));
 builder.Services.AddHttpClient("finhubApiClient", c =>
 {
     var baseUrl = configuration.GetSection("FinHubApi").GetValue<string>("BaseUrl");
